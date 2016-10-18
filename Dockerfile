@@ -41,6 +41,10 @@ RUN apt-get update -y \
         wget \
         --no-install-recommends
 
+# install docker standalone client to /usr/local/bin
+RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.12.2.tgz | tar -C /usr/local/bin -xz --strip-components=1 \
+    && /bin/sh -c "chmod 755 /usr/local/bin/docker*"
+
 # configure git email
 RUN git config --global user.email "ci@deis.com"
 

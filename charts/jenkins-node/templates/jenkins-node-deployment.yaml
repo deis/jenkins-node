@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-node
+  labels:
+    heritage: deis
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jenkins-node
+  template:
+    metadata:
+      labels:
+        app: jenkins-node
+    spec:
+      containers:
+        - name: jenkins-node
+          image: quay.io/{{.Values.org}}/jenkins-node:{{.Values.docker_tag}}
+          imagePullPolicy: Always
+          env:
+            - name: NODE_NAME
+              value: "{{.Values.node_name}}"
+            - name: NODE_SECRET
+              value: "{{.Values.node_secret}}"
+          volumeMounts:
+            - name: docker-socket
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: docker-socket
+          hostPath:
+            path: /var/run/docker.sock

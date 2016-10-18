@@ -1,0 +1,4 @@
+org: "deisci"
+docker_tag: canary
+node_name: changeme
+node_secret: changeme

@@ -1,0 +1,7 @@
+name: jenkins-node
+home: https://github.com/deis/jenkins-node
+version: canary
+description: Deis Jenkins Worker Node.
+maintainers:
+  - name: Deis Team
+    email: engineering@deis.com
