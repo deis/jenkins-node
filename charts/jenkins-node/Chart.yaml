@@ -1,6 +1,6 @@
 name: jenkins-node
 home: https://github.com/deis/jenkins-node
-version: canary
+version: <Will be populated by the ci before publishing the chart>
 description: Deis Jenkins Worker Node.
 maintainers:
   - name: Deis Team
