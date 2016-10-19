@@ -20,6 +20,7 @@ RUN apt-get update -y \
         bundler \
         cabal-install \
         curl \
+        file \
         git \
         jq \
         libffi-dev \
