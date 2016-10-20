@@ -62,6 +62,9 @@ ENV PATH=$PATH:/usr/local/go/bin
 # install golint
 RUN GOPATH=/tmp /usr/local/go/bin/go get -u github.com/golang/lint/golint
 
+# install glide
+RUN curl -L https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz | tar -C /usr/local/bin -xz
+
 # fetch/install shellcheck
 ENV SHELLCHECK_VERSION=0.4.3
 RUN curl -L https://s3-us-west-2.amazonaws.com/get-deis/shellcheck-$SHELLCHECK_VERSION-linux-amd64 -o /usr/local/bin/shellcheck \
