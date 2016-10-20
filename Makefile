@@ -30,4 +30,6 @@ clean: check-docker
 full-clean: check-docker
 	docker images -q $(IMAGE_PREFIX)$(COMPONENT) | xargs docker rmi -f
 
-.PHONY: build clean docker-build full-clean 
+test: build
+
+.PHONY: build clean docker-build full-clean test
