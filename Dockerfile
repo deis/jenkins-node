@@ -81,4 +81,6 @@ ENV PATH=$PATH:$JENKINS_HOME/bin
 
 USER jenkins
 
+WORKDIR $JENKINS_HOME
+
 CMD ["start-node"]
