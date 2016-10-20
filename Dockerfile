@@ -79,4 +79,6 @@ RUN chown -R jenkins:jenkins $JENKINS_HOME
 # add $JENKINS_HOME/bin to system path
 ENV PATH=$PATH:$JENKINS_HOME/bin
 
+USER jenkins
+
 CMD ["start-node"]
