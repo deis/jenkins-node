@@ -34,7 +34,7 @@ RUN apt-get update -y \
         --no-install-recommends
 
 # install docker standalone client to /usr/local/bin
-RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.10.3.tgz | tar -xz \
+RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -C /usr/local/bin -xz --strip-components=1 \
     && chmod +x /usr/local/bin/docker*
 
 # configure git email
