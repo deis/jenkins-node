@@ -15,7 +15,7 @@ RUN adduser \
 RUN addgroup docker
 
 # add jenkins to the docker group
-RUN adduser jenkins docker
+RUN usermod -a -G docker jenkins
 
 # install test dependencies
 RUN apt-get update -y \
