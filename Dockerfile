@@ -2,6 +2,21 @@ FROM ubuntu:16.04
 
 ENV JENKINS_HOME=/home/jenkins
 
+# create jenkins user
+RUN adduser \
+    --system \
+    --shell /bin/bash \
+    --disabled-password \
+    --home $JENKINS_HOME \
+    --group \
+    jenkins
+
+# create docker group
+RUN addgroup docker
+
+# add jenkins to the docker group
+RUN adduser jenkins docker
+
 # install test dependencies
 RUN apt-get update -y \
     && apt-get install -yq \
@@ -63,6 +78,14 @@ RUN curl -L https://s3-us-west-2.amazonaws.com/get-deis/shellcheck-$SHELLCHECK_V
 
 # copy everything to rootfs
 COPY rootfs /
+
+# change ownership of everything in $JENKINS_HOME to jenkins
+RUN chown -R jenkins:jenkins $JENKINS_HOME
+
+# add $JENKINS_HOME/bin to system path
+ENV PATH=$PATH:$JENKINS_HOME/bin
+
+USER jenkins
 
 WORKDIR $JENKINS_HOME
 
