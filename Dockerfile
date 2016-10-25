@@ -2,6 +2,9 @@ FROM ubuntu:16.04
 
 ENV JENKINS_HOME=/home/jenkins
 
+# HACK(bacongobbler): workaround for https://github.com/docker/docker/issues/14669
+ENV HOME=/home/jenkins
+
 # create jenkins user
 RUN adduser \
     --system \
