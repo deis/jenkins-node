@@ -15,7 +15,7 @@ RUN adduser \
 RUN addgroup docker
 
 # add jenkins to the docker group
-RUN usermod -a -G docker jenkins
+RUN adduser jenkins docker
 
 # install test dependencies
 RUN apt-get update -y \
@@ -44,6 +44,7 @@ RUN apt-get update -y \
         psmisc \
         python-dev \
         python-pip \
+        sudo \
         unzip \
         wget \
         --no-install-recommends
@@ -84,8 +85,6 @@ RUN chown -R jenkins:jenkins $JENKINS_HOME
 
 # add $JENKINS_HOME/bin to system path
 ENV PATH=$PATH:$JENKINS_HOME/bin
-
-USER jenkins
 
 WORKDIR $JENKINS_HOME
 
