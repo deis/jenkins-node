@@ -5,8 +5,9 @@
 # administrative interface.
 
 # HACK(bacongobbler): add docker socket to docker group
-docker_socket_owner="$(stat -c "%g" /var/run/docker.sock)"
-adduser "$(getent passwd $docker_socket_owner | cut -d: -f1)" docker || true
+groupadd -g "$(stat -c "%g" /var/run/docker.sock)" docker || true
+# ensure jenkins user is also a member of the docker group
+adduser jenkins docker
 
 wget -N https://ci.deis.io/jnlpJars/slave.jar
 exec sudo -E -u jenkins java -jar slave.jar -jnlpUrl https://ci.deis.io/computer/${NODE_NAME?}/slave-agent.jnlp -secret ${NODE_SECRET?}
