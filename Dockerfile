@@ -60,7 +60,7 @@ RUN git config --global user.name 'Deis CI'
 ENV GO_VERSION=1.7.1
 RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xz
 
-RUN mkdir $JENKINS_HOME/go
+RUN mkdir -p $JENKINS_HOME/go/src
 ENV GOPATH=$JENKINS_HOME/go
 
 # install golint
