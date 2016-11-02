@@ -47,7 +47,7 @@ RUN apt-get update -y \
         --no-install-recommends
 
 # install docker standalone client to /usr/local/bin
-RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -C /usr/local/bin -xz --strip-components=1 \
+RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -C /usr/local/bin -xz --strip=1 \
     && chmod +x /usr/local/bin/docker*
 
 # configure git email
@@ -67,7 +67,8 @@ ENV PATH=$PATH:/usr/local/go/bin
 RUN GOPATH=/tmp /usr/local/go/bin/go get -u github.com/golang/lint/golint
 
 # install glide
-RUN curl -L https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz | tar -C /usr/local/bin -xz
+RUN curl -L https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz | tar -C /usr/local/bin -xz --strip=1 \
+    && rm /usr/local/bin/LICENSE /usr/local/bin/README.md
 
 # fetch/install shellcheck
 ENV SHELLCHECK_VERSION=0.4.3
