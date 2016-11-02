@@ -60,9 +60,6 @@ RUN git config --global user.name 'Deis CI'
 ENV GO_VERSION=1.7.1
 RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xz
 
-# add go to system path
-ENV PATH=$PATH:/usr/local/go/bin
-
 # install golint
 RUN GOPATH=/tmp /usr/local/go/bin/go get -u github.com/golang/lint/golint
 
@@ -81,8 +78,8 @@ COPY rootfs /
 # change ownership of everything in $JENKINS_HOME to jenkins
 RUN chown -R jenkins:jenkins $JENKINS_HOME
 
-# add $JENKINS_HOME/bin to system path
-ENV PATH=$PATH:$JENKINS_HOME/bin
+# add $JENKINS_HOME/bin and go to system path
+ENV PATH=$JENKINS_HOME/bin:/usr/local/go/bin:$PATH
 
 WORKDIR $JENKINS_HOME
 
