@@ -28,7 +28,12 @@ spec:
           volumeMounts:
             - name: docker-socket
               mountPath: /var/run/docker.sock
+            - name: jenkins-workspace
+              mountPath: /home/jenkins/workspace
       volumes:
         - name: docker-socket
           hostPath:
             path: /var/run/docker.sock
+        - name: jenkins-workspace
+          hostPath:
+            path: /home/jenkins/workspace

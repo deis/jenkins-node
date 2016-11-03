@@ -12,6 +12,10 @@ else
 fi
 
 wget -N https://ci.deis.io/jnlpJars/slave.jar
+
+# chown any mounted volumes to the jenkins owner
+chown -R jenkins:jenkins $JENKINS_HOME
+
 # NOTE(bacongobbler): sudo overwrites PATH even with -E specified. A workaround is to use
 # `env "PATH=$PATH"`.
 # See http://superuser.com/questions/98686/passing-path-through-sudo
