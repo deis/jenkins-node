@@ -5,13 +5,15 @@ ENV JENKINS_HOME=/home/jenkins
 # HACK(bacongobbler): workaround for https://github.com/docker/docker/issues/14669
 ENV HOME=/home/jenkins
 
-# create jenkins user
+# create jenkins user and group, sharing the same uid and gid as deis/e2e-runner
+RUN addgroup --gid 999 jenkins
 RUN adduser \
     --system \
     --shell /bin/bash \
     --disabled-password \
     --home $JENKINS_HOME \
-    --group \
+    --gid 999 \
+    --uid 999 \
     jenkins
 
 # install test dependencies
