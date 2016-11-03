@@ -5,6 +5,9 @@ ENV JENKINS_HOME=/home/jenkins
 # HACK(bacongobbler): workaround for https://github.com/docker/docker/issues/14669
 ENV HOME=/home/jenkins
 
+# identify between containerized jenkins nodes and non-containerized
+ENV IN_THE_MATRIX=true
+
 # create jenkins user and group, sharing the same uid and gid as deis/e2e-runner
 RUN addgroup --gid 999 jenkins
 RUN adduser \
