@@ -4,10 +4,12 @@
 # Set NODE_NAME and NODE_SECRET to the values provided by Jenkins in the "Manage Nodes"
 # administrative interface.
 
-# HACK(bacongobbler): add docker socket to docker group
-groupadd -g "$(stat -c "%g" /var/run/docker.sock)" docker || true
-# ensure jenkins user is also a member of the docker group
-adduser jenkins docker
+# HACK(bacongobbler): allow jenkins user group permission to Docker socket
+if addgroup -g "$(stat -c "%g" /var/run/docker.sock)" docker; then
+    addgroup jenkins docker
+else
+    addgroup jenkins "$(stat -c "%G" /var/run/docker.sock)"
+fi
 
 wget -N https://ci.deis.io/jnlpJars/slave.jar
 # NOTE(bacongobbler): sudo overwrites PATH even with -E specified. A workaround is to use
