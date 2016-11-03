@@ -15,10 +15,8 @@ been created with the agent's launch method set to "Launch agent via Java Web St
 container with the credentials supplied:
 
 ```
-$ docker build .
-...
-Successfully built be0896674128
-docker run -e NODE_NAME=my-node-name -e NODE_SECRET=mynodesecret be0896674128
+$ make build
+$ docker run -e NODE_NAME=my-node-name -e NODE_SECRET=mynodesecret -v /var/run/docker.sock:/var/run/docker.sock quay.io/deis/jenkins-node:canary
 ```
 
 Assuming your credentials are correct, you should see the node connected to Jenkins.
