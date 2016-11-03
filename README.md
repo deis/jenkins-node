@@ -16,7 +16,7 @@ container with the credentials supplied:
 
 ```
 $ make build
-$ docker run -e NODE_NAME=my-node-name -e NODE_SECRET=mynodesecret -v /var/run/docker.sock:/var/run/docker.sock quay.io/deis/jenkins-node:canary
+$ docker run -e NODE_NAME=my-node-name -e NODE_SECRET=mynodesecret -v /var/run/docker.sock:/var/run/docker.sock -v /home/jenkins/workspace:/home/jenkins/workspace quay.io/deis/jenkins-node:canary
 ```
 
 Assuming your credentials are correct, you should see the node connected to Jenkins.
