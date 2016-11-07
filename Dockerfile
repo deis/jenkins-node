@@ -91,4 +91,5 @@ ENV PATH=$JENKINS_HOME/bin:/usr/local/go/bin:$PATH
 
 WORKDIR $JENKINS_HOME
 
-CMD ["start-node"]
+ENTRYPOINT ["/bin/start-node"]
+CMD ["jenkins"]
