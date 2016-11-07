@@ -23,6 +23,7 @@ RUN adduser \
 RUN apt-get update -y \
     && apt-get install -yq \
         apt-transport-https \
+        awscli \
         bzr \
         build-essential \
         bundler \
