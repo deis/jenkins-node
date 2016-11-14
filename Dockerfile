@@ -47,6 +47,7 @@ RUN apt-get update -y \
         psmisc \
         python-dev \
         python-pip \
+        rsync \
         sudo \
         unzip \
         wget \
