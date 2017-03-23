@@ -1,4 +1,5 @@
 # Jenkins Node
+[![Build Status](https://ci.deis.io/job/jenkins-node/badge/icon)](https://ci.deis.io/job/jenkins-node)
 
 **NOTE**: This is a work-in-progress. Things are expected to change over time.
 
