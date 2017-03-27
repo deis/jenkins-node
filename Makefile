@@ -6,6 +6,9 @@ SHORT_NAME ?= $(COMPONENT)
 
 include versioning.mk
 
+TEST_ENV_PREFIX := docker run --rm -v ${CURDIR}:/bash -w /bash quay.io/deis/shell-dev
+SHELL_SCRIPTS = $(wildcard rootfs/bin/*)
+
 check-kubectl:
 	@if [ -z $$(which kubectl) ]; then \
 	  echo "kubectl binary could not be located"; \
@@ -30,6 +33,9 @@ clean: check-docker
 full-clean: check-docker
 	docker images -q $(IMAGE_PREFIX)$(COMPONENT) | xargs docker rmi -f
 
-test: build
+test: test-style
+
+test-style:
+	${TEST_ENV_PREFIX} shellcheck $(SHELL_SCRIPTS)
 
 .PHONY: build clean docker-build full-clean test
