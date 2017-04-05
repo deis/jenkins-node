@@ -2,3 +2,4 @@ org: "deisci"
 docker_tag: canary
 node_name: changeme
 node_secret: changeme
+jenkins_url: https://ci.deis.io

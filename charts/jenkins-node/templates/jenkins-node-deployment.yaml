@@ -21,6 +21,8 @@ spec:
           image: quay.io/{{.Values.org}}/jenkins-node:{{.Values.docker_tag}}
           imagePullPolicy: Always
           env:
+            - name: JENKINS_URL
+              value: "{{.Values.jenkins_url}}"
             - name: NODE_NAME
               value: "{{.Values.node_name}}"
             - name: NODE_SECRET

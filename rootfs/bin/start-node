@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Connects this machine as a Jenkins node to https://ci.deis.io/
+# Connects this machine as a Jenkins node to ${JENKINS_URL}
 # Set NODE_NAME and NODE_SECRET to the values provided by Jenkins in the "Manage Nodes"
 # administrative interface.
 
@@ -15,11 +15,11 @@ fi
 chown -R jenkins:jenkins "${JENKINS_HOME}"
 
 if [ "$1" = 'jenkins' ]; then
-    wget -N https://ci.deis.io/jnlpJars/slave.jar
+    wget -N "${JENKINS_URL}"/jnlpJars/slave.jar
     # NOTE(bacongobbler): sudo overwrites PATH even with -E specified. A workaround is to use
     # `env "PATH=$PATH"`.
     # See http://superuser.com/questions/98686/passing-path-through-sudo
-    exec sudo -E -u jenkins env "PATH=$PATH" java -jar slave.jar -jnlpUrl "https://ci.deis.io/computer/${NODE_NAME?}/slave-agent.jnlp -secret ${NODE_SECRET?}"
+    exec sudo -E -u jenkins env "PATH=$PATH" java -jar slave.jar -jnlpUrl "${JENKINS_URL}/computer/${NODE_NAME?}/slave-agent.jnlp" -secret "${NODE_SECRET?}"
 fi
 
 exec sudo -E -u jenkins env "PATH=$PATH" "$@"
