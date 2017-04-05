@@ -21,10 +21,14 @@ spec:
           image: quay.io/{{.Values.org}}/jenkins-node:{{.Values.docker_tag}}
           imagePullPolicy: Always
           env:
-            - name: NODE_NAME
-              value: "{{.Values.node_name}}"
-            - name: NODE_SECRET
-              value: "{{.Values.node_secret}}"
+            - name: JENKINS_URL
+              value: "{{.Values.jenkins.url}}"
+            - name: JENKINS_TUNNEL
+              value: "{{.Values.jenkins.tunnel}}"
+            - name: JENKINS_NAME
+              value: "{{.Values.agent.name}}"
+            - name: JENKINS_SECRET
+              value: "{{.Values.agent.secret}}"
           volumeMounts:
             - name: docker-socket
               mountPath: /var/run/docker.sock

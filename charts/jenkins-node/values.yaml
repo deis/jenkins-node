@@ -1,4 +1,13 @@
 org: "deisci"
 docker_tag: canary
-node_name: changeme
-node_secret: changeme
+
+# Jenkins agent/slave configuration
+agent:
+  name: changeme
+  secret: changeme
+
+# Jenkins master details
+jenkins:
+  url: changeme
+  # If jnlp communication served on url other than jenkins.url:50000
+  # tunnel: <jnlp.host>:<jnlp.port>
