@@ -1,7 +1,7 @@
 name: jenkins-node
 home: https://github.com/deis/jenkins-node
 version: <Will be populated by the ci before publishing the chart>
-description: Deis Jenkins Worker Node.
+description: Deis Jenkins JNLP Agent
 maintainers:
   - name: Deis Team
     email: engineering@deis.com

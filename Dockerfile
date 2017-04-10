@@ -1,5 +1,12 @@
-FROM ubuntu:16.04
+FROM openjdk:8-jdk
 
+ARG JENKINS_REMOTING_VERSION=3.7
+
+RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${JENKINS_REMOTING_VERSION}/remoting-${JENKINS_REMOTING_VERSION}.jar \
+  && chmod 755 /usr/share/jenkins \
+  && chmod 644 /usr/share/jenkins/slave.jar
+
+# Workflow-specific setup and dependency installation
 ENV JENKINS_HOME=/home/jenkins
 
 # HACK(bacongobbler): workaround for https://github.com/docker/docker/issues/14669
@@ -93,5 +100,4 @@ ENV PATH=$JENKINS_HOME/bin:/usr/local/go/bin:$PATH
 
 WORKDIR $JENKINS_HOME
 
-ENTRYPOINT ["/bin/start-node"]
-CMD ["jenkins"]
+ENTRYPOINT ["jenkins-slave"]
