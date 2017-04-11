@@ -45,6 +45,7 @@ RUN apt-get update -y \
         libpython2.7 \
         libsasl2-dev \
         libsdl1.2debian \
+        libssl-dev \
         libyaml-dev \
         mercurial \
         ntp \
@@ -59,6 +60,15 @@ RUN apt-get update -y \
         unzip \
         wget \
         --no-install-recommends
+
+# azure cli specific setup
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \
+    tee /etc/apt/sources.list.d/azure-cli.list \
+    && apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
+
+# install azure cli
+RUN apt-get update -y \
+    && apt-get install -yq azure-cli
 
 # install docker standalone client to /usr/local/bin
 RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -C /usr/local/bin -xz --strip=1 \
