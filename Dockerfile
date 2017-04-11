@@ -85,8 +85,8 @@ RUN curl -L https://github.com/Masterminds/glide/releases/download/v0.12.3/glide
     && rm /usr/local/bin/LICENSE /usr/local/bin/README.md
 
 # fetch/install shellcheck
-ENV SHELLCHECK_VERSION=0.4.3
-RUN curl -L https://s3-us-west-2.amazonaws.com/get-deis/shellcheck-$SHELLCHECK_VERSION-linux-amd64 -o /usr/local/bin/shellcheck \
+ENV SHELLCHECK_VERSION=v0.4.6
+RUN curl -L https://deisbuildartifacts.blob.core.windows.net/shellcheck/shellcheck-${SHELLCHECK_VERSION}-linux-amd64 -o /usr/local/bin/shellcheck \
     && chmod +x /usr/local/bin/shellcheck
 
 # copy everything to rootfs
