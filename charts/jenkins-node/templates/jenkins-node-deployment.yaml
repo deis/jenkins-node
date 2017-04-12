@@ -16,6 +16,10 @@ spec:
       labels:
         app: jenkins-node
     spec:
+{{- if .Values.agent.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.agent.nodeSelector | indent 8 }}
+{{- end }}
       containers:
         - name: jenkins-node
           image: quay.io/{{.Values.org}}/jenkins-node:{{.Values.docker_tag}}
@@ -30,11 +34,17 @@ spec:
             - name: JENKINS_SECRET
               value: "{{.Values.agent.secret}}"
           volumeMounts:
+{{- if .Values.mounts }}
+{{ toYaml .Values.mounts | indent 12 }}
+{{- end }}
             - name: docker-socket
               mountPath: /var/run/docker.sock
             - name: jenkins-workspace
               mountPath: /home/jenkins/workspace
       volumes:
+{{- if .Values.volumes }}
+{{ toYaml .Values.volumes | indent 8 }}
+{{- end }}
         - name: docker-socket
           hostPath:
             path: /var/run/docker.sock
