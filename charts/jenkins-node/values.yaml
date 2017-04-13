@@ -5,9 +5,22 @@ docker_tag: canary
 agent:
   name: changeme
   secret: changeme
+  # Tie agent to particular node
+  # nodeSelector:
+  #   particularnode: "true"
 
 # Jenkins master details
 jenkins:
   url: changeme
   # If jnlp communication served on url other than jenkins.url:50000
   # tunnel: <jnlp.host>:<jnlp.port>
+
+# Add additional volume mounts
+# volumes:
+# - name: volumename
+#   hostPath:
+#     path: /path/on/host
+
+# mounts:
+# - name: volumename
+#   mountPath: /path/in/container
