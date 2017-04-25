@@ -81,8 +81,8 @@ RUN git config --global user.email "ci@deis.com"
 # configure git user
 RUN git config --global user.name 'Deis CI'
 
-# install go 1.7.1
-ENV GO_VERSION=1.7.1
+# install go 1.7.5
+ENV GO_VERSION=1.7.5
 RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xz
 
 RUN mkdir -p $JENKINS_HOME/go/src
