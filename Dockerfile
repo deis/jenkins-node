@@ -58,6 +58,7 @@ RUN apt-get update -y \
         rsync \
         sudo \
         unzip \
+        upx \
         wget \
         --no-install-recommends
 
