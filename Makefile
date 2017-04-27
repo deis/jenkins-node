@@ -7,7 +7,7 @@ SHORT_NAME ?= $(COMPONENT)
 include versioning.mk
 
 TEST_ENV_PREFIX := docker run --rm -v ${CURDIR}:/bash -w /bash quay.io/deis/shell-dev
-SHELL_SCRIPTS = $(wildcard rootfs/bin/*)
+SHELL_SCRIPTS = $(wildcard rootfs/usr/local/bin/*)
 
 check-kubectl:
 	@if [ -z $$(which kubectl) ]; then \

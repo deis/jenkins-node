@@ -47,7 +47,7 @@ if [ $# -eq 1 ]; then
 else
 
 	# if -tunnel is not provided try env vars
-	if [[ "$@" != *"-tunnel "* ]]; then
+	if [[ "$*" != *"-tunnel "* ]]; then
 		if [ ! -z "$JENKINS_TUNNEL" ]; then
 			TUNNEL="-tunnel $JENKINS_TUNNEL"
 		fi
@@ -67,6 +67,6 @@ else
 	fi
 
 	exec sudo -E -u jenkins env "PATH=$PATH" \
-		java $JAVA_OPTS $JNLP_PROTOCOL_OPTS -cp /usr/share/jenkins/slave.jar \
-		hudson.remoting.jnlp.Main -headless $TUNNEL $URL $JENKINS_SECRET $JENKINS_AGENT_NAME "$@"
+		java "$JAVA_OPTS" "$JNLP_PROTOCOL_OPTS" -cp /usr/share/jenkins/slave.jar \
+		hudson.remoting.jnlp.Main -headless "$TUNNEL" "$URL" "$JENKINS_SECRET" "$JENKINS_AGENT_NAME" "$@"
 fi
