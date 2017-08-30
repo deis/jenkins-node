@@ -1,6 +1,7 @@
 FROM openjdk:8-jdk
 
 ARG JENKINS_REMOTING_VERSION=3.10
+ARG AZCLI_VERSION=2.0.15
 
 RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${JENKINS_REMOTING_VERSION}/remoting-${JENKINS_REMOTING_VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
@@ -55,6 +56,7 @@ RUN apt-get update -y \
         psmisc \
         python-dev \
         python-pip \
+        python-setuptools \
         rsync \
         sudo \
         unzip \
@@ -62,14 +64,8 @@ RUN apt-get update -y \
         wget \
         --no-install-recommends
 
-# azure cli specific setup
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \
-    tee /etc/apt/sources.list.d/azure-cli.list \
-    && apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
-
 # install azure cli
-RUN apt-get update -y \
-    && apt-get install -yq azure-cli
+RUN pip install --disable-pip-version-check --no-cache-dir azure-cli==${AZCLI_VERSION}
 
 # install docker standalone client to /usr/local/bin
 RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -C /usr/local/bin -xz --strip=1 \
